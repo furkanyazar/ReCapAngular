@@ -1,0 +1,56 @@
+<div *ngIf="dataLoaded == false" class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<div class="card text-center">
+  <div class="card-header">
+    <div
+      id="carouselExampleControls"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div
+          *ngFor="let imagePath of carDetail.carImagesPaths"
+          [class]="getImagesClass(imagePath)"
+        >
+          <img
+            src="https://localhost:44327/Uploads/Images/{{ imagePath }}"
+            class="d-block w-100"
+          />
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleControls"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleControls"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">
+      {{ carDetail.brandName + " " + carDetail.carName }}
+    </h5>
+    <ul class="list-group">
+      <li class="list-group-item">{{ "Renk: " + carDetail.colorName }}</li>
+      <li class="list-group-item">{{ "Model: " + carDetail.modelYear }}</li>
+    </ul>
+    <hr />
+    <p class="card-text">{{ carDetail.description }}</p>
+    <a href="#" class="btn btn-success">Kirala</a>
+  </div>
+  <div class="card-footer text-muted">{{ carDetail.dailyPrice }}₺</div>
+</div>
