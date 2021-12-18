@@ -1,3 +1,7 @@
+import { CartService } from './../../services/cart.service';
+import { Rent } from './../../models/rent';
+import { ToastrService } from 'ngx-toastr';
+import { RentalService } from './../../services/rental.service';
 import { ActivatedRoute } from '@angular/router';
 import { CarService } from './../../services/car.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,10 +15,16 @@ import { CarDetail } from 'src/app/models/carDetail';
 export class CarDetailComponent implements OnInit {
   carDetail: CarDetail;
   dataLoaded = false;
+  minDate = new Date();
+  rentDate: Date;
+  returnDate: Date;
 
   constructor(
     private carService: CarService,
-    private activatedRoute: ActivatedRoute
+    private rentalService: RentalService,
+    private activatedRoute: ActivatedRoute,
+    private toastrService: ToastrService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -34,9 +44,21 @@ export class CarDetailComponent implements OnInit {
 
   getImagesClass(path: string) {
     if (path == this.carDetail.carImagesPaths[0]) {
-      return "carousel-item active";
+      return 'carousel-item active';
     } else {
-      return "carousel-item";
+      return 'carousel-item';
+    }
+  }
+
+  addToCart() {
+    if (!this.rentDate || !this.returnDate) {
+      this.toastrService.error('Tarih aralığı uygun değil');
+    } else {
+      this.cartService.addToCart(
+        this.carDetail,
+        this.rentDate,
+        this.returnDate
+      );
     }
   }
 }

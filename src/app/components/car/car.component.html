@@ -1,9 +1,26 @@
 <div *ngIf="dataLoaded == false" class="spinner-border" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>
-<div *ngIf="dataLoaded == true" class="row">
-  <div (click)="navigateToCarDetail(car.carId)" *ngFor="let car of cars" class="col-sm-4" style="margin-bottom: 12px">
-    <div class="card" style="width: 18rem" role="button">
+<div *ngIf="dataLoaded == true" class="row mb-3">
+  <div *ngIf="dataLoaded == true" class="mb-3 mt-3">
+    <label for="filterCarText" class="form-label">Ürün Ara</label>
+    <input
+      type="text"
+      [(ngModel)]="filterCarText"
+      class="form-control"
+      id="filterText"
+      placeholder="Arama ifadesi giriniz"
+    />
+  </div>
+  <div *ngIf="filterCarText" class="alert alert-success">
+    {{ filterCarText }} aradınız
+  </div>
+  <div
+    (click)="navigateToCarDetail(car.carId)"
+    *ngFor="let car of cars | filterCar: filterCarText"
+    class="col-md-4 mb-4"
+  >
+    <div class="card" role="button">
       <img
         [src]="
           'https://localhost:44327/Uploads/Images/' + car.carImagesPaths[0]
@@ -12,12 +29,12 @@
       />
       <div class="card-body">
         <h5 class="card-title">{{ car.brandName + " " + car.carName }}</h5>
-        <hr>
+        <hr />
         <ul class="list-group">
           <li class="list-group-item">{{ "Renk: " + car.colorName }}</li>
           <li class="list-group-item">{{ "Model: " + car.modelYear }}</li>
         </ul>
-        <hr>
+        <hr />
         <h5 class="text-center">{{ car.dailyPrice + "₺" }}</h5>
       </div>
     </div>

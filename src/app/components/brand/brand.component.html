@@ -1,7 +1,8 @@
 <div *ngIf="dataLoaded == false" class="spinner-border" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>
-<ul *ngIf="dataLoaded == true" class="list-group">
+
+<!-- <ul *ngIf="dataLoaded == true" class="list-group">
   <li
     (click)="setCurrentBrand(brand)"
     routerLink="cars/brand/{{ brand.brandId }}"
@@ -11,4 +12,20 @@
     {{ brand.brandName }}
   </li>
 </ul>
-<hr />
+<hr /> -->
+
+<br>
+<div *ngIf="dataLoaded == true">
+  <div class="mt-1">
+    <input [(ngModel)]="filterBrandText" type="text" class="form-control" id="filterBrandText" placeholder="Marka ara">
+  </div>
+  <!-- <select class="form-select" aria-label="Markalar">
+    <option selected>Markalar</option>
+    <option *ngFor="let brand of brands" value="{{brand.brandId}}">{{brand.brandName}}</option>
+  </select> -->
+  <select class="form-select" size="4" aria-label="Markalar">
+    <option (click)="selectedBrand(0)" selected>Tüm Markalar</option>
+    <option (click)="selectedBrand(brand.brandId)" *ngFor="let brand of brands | filterBrand: filterBrandText" value="{{brand.brandId}}">{{brand.brandName}}</option>
+  </select>
+</div>
+<hr>

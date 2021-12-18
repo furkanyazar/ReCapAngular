@@ -8,11 +8,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CustomerService {
-  apiUrl = 'https://localhost:44327/api/Customers/getall';
+  apiUrl = 'https://localhost:44327/api/Customers/';
 
   constructor(private httpClient: HttpClient) {}
 
   getCustomers(): Observable<ListResponseModel<Customer>> {
-    return this.httpClient.get<ListResponseModel<Customer>>(this.apiUrl);
+    return this.httpClient.get<ListResponseModel<Customer>>(
+      this.apiUrl + 'getall'
+    );
   }
 }

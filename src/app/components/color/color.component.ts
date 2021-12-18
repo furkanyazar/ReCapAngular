@@ -1,6 +1,6 @@
 import { ColorService } from './../../services/color.service';
 import { Color } from './../../models/color';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-color',
@@ -11,8 +11,11 @@ export class ColorComponent implements OnInit {
   colors: Color[] = [];
   dataLoaded = false;
   currentColor: Color;
+  filterColorText = '';
 
   constructor(private colorService: ColorService) {}
+
+  @Output() colorEvent: EventEmitter<any> = new EventEmitter();
 
   ngOnInit(): void {
     this.getColors();
@@ -25,15 +28,19 @@ export class ColorComponent implements OnInit {
     });
   }
 
-  setCurrentColor(color: Color) {
-    this.currentColor = color;
+  selectedColor(colorId: number) {
+    this.colorEvent.emit({colorId});
   }
 
-  getCurrentColorClass(color: Color) {
-    if (color == this.currentColor) {
-      return 'list-group-item active';
-    } else {
-      return 'list-group-item';
-    }
-  }
+  // setCurrentColor(color: Color) {
+  //   this.currentColor = color;
+  // }
+
+  // getCurrentColorClass(color: Color) {
+  //   if (color == this.currentColor) {
+  //     return 'list-group-item active';
+  //   } else {
+  //     return 'list-group-item';
+  //   }
+  // }
 }

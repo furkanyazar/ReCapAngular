@@ -50,7 +50,24 @@
     </ul>
     <hr />
     <p class="card-text">{{ carDetail.description }}</p>
-    <a href="#" class="btn btn-success">Kirala</a>
+    <mat-form-field>
+      <mat-label>Tarih aralığı seç</mat-label>
+      <mat-date-range-input matInput [rangePicker]="picker" [min]="minDate">
+        <input
+          matStartDate
+          placeholder="Kiralama tarihi"
+          [(ngModel)]="rentDate"
+        />
+        <input matEndDate placeholder="Teslim tarihi" [(ngModel)]="returnDate" />
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <br />
+
+    <button (click)="addToCart()" type="button" class="btn btn-success">
+      Sepete Ekle
+    </button>
   </div>
   <div class="card-footer text-muted">{{ carDetail.dailyPrice }}₺</div>
 </div>

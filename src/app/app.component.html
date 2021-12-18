@@ -1,13 +1,22 @@
 <div class="container">
   <app-navi></app-navi>
   <div class="row">
-    <div class="col-md-4">
-      <app-brand></app-brand>
-      <app-color></app-color>
-      <app-customer></app-customer>
+    <div class="col-md-3">
+      <!-- <app-brand></app-brand>
+      <app-color></app-color> -->
+      <app-sidebar></app-sidebar>
+      <!-- <app-customer></app-customer> -->
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
       <router-outlet></router-outlet>
     </div>
   </div>
+  <footer>
+    <div class="footer-copyright text-center py-3">
+      © 2021 Copyright | Developed by
+      <a href="https://linkedin.com/in/furkanyazar" target="_blank"
+        >Furkan Yazar</a
+      >
+    </div>
+  </footer>
 </div>
